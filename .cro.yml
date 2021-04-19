@@ -1,0 +1,15 @@
+---
+cro: 1
+id: WebChat
+env:  []
+endpoints: 
+  - 
+    host-env: CSSTIDY_HOST
+    protocol: https
+    id: https
+    port-env: CSSTIDY_PORT
+    name: HTTPS
+entrypoint: service.p6
+links:  []
+name: WebChat
+...

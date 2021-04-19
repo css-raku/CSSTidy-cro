@@ -1,0 +1,37 @@
+{
+  "build-depends": [
+  ],
+  "perl": "6.*",
+  "meta-version": "0",
+  "tags": [
+    ""
+  ],
+  "auth": "Write me!",
+  "provides": {
+    "CSSTidy": "lib/CSSTidy.rakumod",
+    "Routes": "lib/Routes.rakumod"
+  },
+  "resources": [
+    "fake-tls/ca-crt.pem",
+    "fake-tls/server-crt.pem",
+    "fake-tls/server-key.pem"
+  ],
+  "authors": [
+    ""
+  ],
+  "source-url": "Write me!",
+  "depends": [
+    "Cro::HTTP",
+    "Cro::WebSocket",
+    "CSS::Stylesheet"
+  ],
+  "name": "WebChat",
+  "support": {
+    "source": "Write me!"
+  },
+  "description": "Write me!",
+  "version": "0.0.1",
+  "license": "Write me!",
+  "test-depends": [
+  ]
+}
