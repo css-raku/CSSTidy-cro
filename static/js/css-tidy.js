@@ -6,18 +6,20 @@ $(document).ready(function () {
 
     // send message from the form
     document.forms.publish.onsubmit = function() {
-        let outgoingMessage = this.message.value;
+        let outgoingMessage = {
+            css: this.message.value
+        };
 
-        socket.send(outgoingMessage);
+        socket.send(JSON.stringify(outgoingMessage));
         return false;
     };
 
     // message received - show the message in div#messages
     socket.onmessage = function(event) {
-        let message = event.data;
+        let message = JSON.parse(event.data);
 
         let messageElem = document.createElement('div');
-        messageElem.textContent = message;
+        messageElem.textContent = message["css"];
         document.getElementById('output').replaceChildren(messageElem);
     }
 });

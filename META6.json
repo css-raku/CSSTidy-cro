@@ -23,7 +23,8 @@
   "depends": [
     "Cro::HTTP",
     "Cro::WebSocket",
-    "CSS::Stylesheet"
+    "CSS::Stylesheet",
+    "JSON::Fast"
   ],
   "name": "WebChat",
   "support": {

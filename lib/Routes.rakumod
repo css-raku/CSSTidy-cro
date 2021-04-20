@@ -1,6 +1,7 @@
 use Cro::HTTP::Router;
 use Cro::HTTP::Router::WebSocket;
 use CSSTidy;
+use JSON::Fast;
 
 sub routes() is export {
 
@@ -25,9 +26,11 @@ sub routes() is export {
                     }
                     # Whatever is emitted on the $chat Supplier (shared between all)
                     # web sockets), we send on this web socket.
-                    whenever $chat -> $text {
+                    whenever $chat -> $json {
+                        my %msg = from-json($json);
                         my CSSTidy $tidier .= new();
-                        emit $tidier.optimize($text);
+                        my $css = $tidier.optimize(%msg<css>);
+                        emit to-json %( :$css );
                     }
                 }
             }
