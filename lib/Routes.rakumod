@@ -13,26 +13,13 @@ sub routes() is export {
         get -> 'js', *@path {
             static 'static/js', @path
         }
-        get -> 'tidy' {
-            # For each request for a web socket...
-            my $chat = Supplier.new;
-            web-socket -> $incoming {
-                # We start this bit of reactive logic...
-                supply {
-                    # Whenever we get a message on the socket, we emit it into the
-                    # $chat Supplier
-                    whenever $incoming -> $message {
-                        $chat.emit(await $message.body-text);
-                    }
-                    # Whatever is emitted on the $chat Supplier (shared between all)
-                    # web sockets), we send on this web socket.
-                    whenever $chat -> $json {
-                        my %msg = from-json($json);
-                        my CSSTidy $tidier .= new();
-                        my $css = $tidier.optimize(%msg<css>);
-                        emit to-json %( :$css );
-                    }
-                }
+        post -> 'tidy' {
+            request-body -> %req {
+                my Str:D $css = %req<css>;
+                my CSSTidy $tidier .= new: :$css;
+                $css = $tidier.optimize;
+                my @warnings = $tidier.warnings>>.message;
+                content 'application/json', %( :$css, :@warnings, );
             }
         }
     }

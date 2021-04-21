@@ -1,12 +1,12 @@
 <html>
   <head>
-   <script type="text/javascript" src="js/jquery-3.6.0.slim.min.js"></script>
+   <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
     <script src="js/css-tidy.js"></script>
   </head>
   <body>
     <h2>Enter CSS</h2>
-    <form name="publish">
-      <textarea name="message" rows="24" cols="80">
+    <form name="publish" id="publish">
+      <textarea name="css" rows="24" cols="80">
 h1 {
     font-family:times;
     font-size:10pt;
@@ -29,5 +29,7 @@ h1 {
 
     <!-- div with messages -->
     <div id="output"></div>
+    <div id="warnings" style="display:none; color:red"">
+    </div>
   </body>
 </html>

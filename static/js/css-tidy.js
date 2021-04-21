@@ -1,25 +1,27 @@
 $(document).ready(function () {
 
-    let endpoint = 'tidy';
-    let host = window.location.host;
-    let socket = new WebSocket("ws://" + host + '/' + endpoint);
-
     // send message from the form
-    document.forms.publish.onsubmit = function() {
-        let outgoingMessage = {
-            css: this.message.value
-        };
+    $("#publish").submit(function(event){
+        event.preventDefault(); // avoid to execute the actual submit of the form.
 
-        socket.send(JSON.stringify(outgoingMessage));
-        return false;
-    };
+        $.ajax({
+            url: '/tidy',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(resp)
+           {
+               // message received - show the message in div#messages
+               let messageElem = document.createElement('div');
+               let css_tidied = resp["css"];
+               let warnings = resp["warnings"];
+               messageElem.textContent = css_tidied;
+               document.getElementById('output').replaceChildren(messageElem);
+               if (warnings.length) {
+                   // stub
+                   alert("ouch! " + warnings[0] + '...');
+               }
+           }
+        });
+    });
 
-    // message received - show the message in div#messages
-    socket.onmessage = function(event) {
-        let message = JSON.parse(event.data);
-
-        let messageElem = document.createElement('div');
-        messageElem.textContent = message["css"];
-        document.getElementById('output').replaceChildren(messageElem);
-    }
 });
