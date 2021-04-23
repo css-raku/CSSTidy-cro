@@ -1,35 +1,54 @@
 <html>
   <head>
    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/css-tidy.js"></script>
+   <script src="js/css-tidy.js"></script>
+   <style>
+     .opt { border:2px solid lightgray; padding:3px; margin:1px; }
+   </style>
   </head>
   <body>
     <h2>Enter CSS</h2>
     <form name="publish" id="publish">
-      <textarea name="css" rows="24" cols="80">
-h1 {
-    font-family:times;
-    font-size:10pt;
-    font-weight:bold;
-    border-bottom:red solid 1px;
-    border-left-color:red;
-    border-left-style:solid;
-    border-left-width:1px;
-    border-right-color:red;
-    border-right-style:solid;
-    border-right-width:1px;
-    border-top-color:red;
-    border-top-style:solid;
-    border-top-width:1px;
+      <table>
+        <tr>
+          <td>
+            <textarea name="css" id="css" rows="24" cols="80" style="white-space:pre-line">
+.ui-accordion {
+	margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 1.1em;
+	border-bottom: 1px solid #d3d3d3;
 }
-      </textarea>
+            </textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <div id="warnings" style="display:none; color:red">
+              </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="opt">
+              <input type="radio" name="mode" value="optimize" id="optimize" checked="true" /><label for="optimize">Optimize</label>
+              <input type="radio" name="mode" value="atomize" id="atomize" /><label for="atomize">Atomize</label>
+            </span>
+            <span class="opt">
+              <input type="checkbox" name="pretty" id="pretty" checked="checked"/><label for="pretty">Pretty</label>
+            </span>
+            <span class="opt">
+              <b>Color:</b>
+              <input type="radio" name="color" value="names" id="color-names" checked="checked"><label for="color-names">Names</label>
+              <input type="radio" name="color" value="masks" id="color-masks"><label for="color-masks">Masks</label>
+              <input type="radio" name="color" value="values" id="color-values"><label for="color-values">Functions</label>
+            </span>
+          </td>
+        </tr>
+      </table>
       <br/>
-      <input type="submit" value="Optimize">
+      <input type="submit" id="submit" value="Tidy">
     </form>
 
-    <!-- div with messages -->
-    <div id="output"></div>
-    <div id="warnings" style="display:none; color:red"">
-    </div>
   </body>
 </html>

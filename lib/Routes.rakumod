@@ -17,7 +17,11 @@ sub routes() is export {
             request-body -> %req {
                 my Str:D $css = %req<css>;
                 my CSSTidy $tidier .= new: :$css;
-                $css = $tidier.optimize;
+                my Bool $optimize = %req<mode> eq "optimize";
+                my Bool $terse        = ! %req<pretty>;
+                my Pair $color = 'color-' ~ %req<color> => True;
+
+                $css = $tidier.tidy: :$optimize, :$terse, |$color;
                 my @warnings = $tidier.warnings>>.message;
                 content 'application/json', %( :$css, :@warnings, );
             }

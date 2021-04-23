@@ -3,6 +3,7 @@ $(document).ready(function () {
     // send message from the form
     $("#publish").submit(function(event){
         event.preventDefault(); // avoid to execute the actual submit of the form.
+        $('#submit').prop("disabled", true);
 
         $.ajax({
             url: '/tidy',
@@ -15,11 +16,12 @@ $(document).ready(function () {
                let css_tidied = resp["css"];
                let warnings = resp["warnings"];
                messageElem.textContent = css_tidied;
-               document.getElementById('output').replaceChildren(messageElem);
+               $('#css').val(css_tidied);
                if (warnings.length) {
                    // stub
                    alert("ouch! " + warnings[0] + '...');
                }
+               $('#submit').prop("disabled", false);
            }
         });
     });

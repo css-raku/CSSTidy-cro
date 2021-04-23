@@ -7,6 +7,6 @@ submethod TWEAK(Str:D :$css!) {
     $!stylesheet .= parse: $css, :!warn;
 }
 
-method optimize returns Str:D {
-    $!stylesheet.Str;
+method tidy(|c) returns Str:D {
+    $!stylesheet.Str: |c;
 }
