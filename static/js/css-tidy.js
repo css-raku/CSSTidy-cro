@@ -9,8 +9,7 @@ $(document).ready(function () {
             url: '/tidy',
             type: 'POST',
             data: $(this).serialize(),
-            success: function(resp)
-           {
+            success: function(resp) {
                // message received - show the message in div#messages
                let messageElem = document.createElement('div');
                let css_tidied = resp["css"];
@@ -18,11 +17,19 @@ $(document).ready(function () {
                messageElem.textContent = css_tidied;
                $('#css').val(css_tidied);
                if (warnings.length) {
-                   // stub
-                   alert("ouch! " + warnings[0] + '...');
+                   $('#warnings').text( warnings.join("\n") );
+                   $('#warnings').show();
+               }
+               else {
+                   $('#warnings').hide();
+                   $('#warnings').text('');
                }
                $('#submit').prop("disabled", false);
-           }
+            },
+            error: function(req, status, err) {
+                alert("ouch! " + status);
+               $('#submit').prop("disabled", false);
+            },
         });
     });
 

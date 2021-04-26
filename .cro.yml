@@ -9,7 +9,7 @@ endpoints:
     id: https
     port-env: CSSTIDY_PORT
     name: HTTPS
-entrypoint: service.p6
+entrypoint: service.raku
 links:  []
 name: CSSTidy
 ...

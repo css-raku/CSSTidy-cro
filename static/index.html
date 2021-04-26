@@ -4,6 +4,7 @@
    <script src="js/css-tidy.js"></script>
    <style>
      .opt { border:2px solid lightgray; padding:3px; margin:1px; }
+     .verbatim { white-space: pre-line; }
    </style>
   </head>
   <body>
@@ -12,7 +13,7 @@
       <table>
         <tr>
           <td>
-            <textarea name="css" id="css" rows="24" cols="80" style="white-space:pre-line">
+            <textarea name="css" id="css" rows="24" cols="80" class="verbatim">
 .ui-accordion {
 	margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none;
 	font-family: Verdana, Arial, sans-serif;
@@ -20,12 +21,6 @@
 	border-bottom: 1px solid #d3d3d3;
 }
             </textarea>
-          </td>
-        </tr>
-        <tr>
-          <td>
-              <div id="warnings" style="display:none; color:red">
-              </div>
           </td>
         </tr>
         <tr>
@@ -43,6 +38,12 @@
               <input type="radio" name="color" value="masks" id="color-masks"><label for="color-masks">Masks</label>
               <input type="radio" name="color" value="values" id="color-values"><label for="color-values">Functions</label>
             </span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <div id="warnings" style="display:none; color:brown" class="verbatim">
+              </div>
           </td>
         </tr>
       </table>
