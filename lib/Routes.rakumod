@@ -13,13 +13,16 @@ sub routes() is export {
         get -> 'js', *@path {
             static 'static/js', @path
         }
+
         post -> 'tidy' {
             request-body -> %req {
                 my Str:D $css = %req<css>;
+                $css .= subst(/\r\n/, "\n", :g); # https://github.com/croservices/cro-http/issues/136
+
                 my CSSTidy $tidier .= new: :$css;
                 my Bool $optimize = %req<mode> eq "optimize";
-                my Bool $terse        = ! %req<pretty>;
-                my Pair $color = 'color-' ~ %req<color> => True;
+                my Bool $terse    = ! %req<pretty>;
+                my Pair $color    = 'color-' ~ %req<color> => True;
 
                 $css = $tidier.tidy: :$optimize, :$terse, |$color;
                 my @warnings = $tidier.warnings>>.message;

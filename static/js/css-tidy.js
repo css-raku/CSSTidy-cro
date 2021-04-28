@@ -10,7 +10,7 @@ $(document).ready(function () {
             type: 'POST',
             data: $(this).serialize(),
             success: function(resp) {
-               // message received - show the message in div#messages
+               // show the updated CSS and any warnings
                let messageElem = document.createElement('div');
                let css_tidied = resp["css"];
                let warnings = resp["warnings"];
