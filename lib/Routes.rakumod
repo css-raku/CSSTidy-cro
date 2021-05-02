@@ -17,7 +17,6 @@ sub routes() is export {
         post -> 'tidy' {
             request-body -> %req {
                 my Str:D $css = %req<css>;
-                $css .= subst(/\r\n/, "\n", :g); # https://github.com/croservices/cro-http/issues/136
 
                 my CSSTidy $tidier .= new: :$css;
                 my Bool $optimize = %req<mode> eq "optimize";
